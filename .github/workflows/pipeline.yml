@@ -79,8 +79,3 @@ jobs:
           DISCORD_USERNAME: "dhatGuy's bot"
         with:
           args: "Deployment of {{ EVENT_PAYLOAD.repository.full_name }} wasn't successful."
-
-  tag_release:
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
-    steps:

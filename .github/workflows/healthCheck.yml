@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '00 00 * * THU'
+    - cron: '00 00 * * 4'
 
 jobs: 
   health_check:
@@ -15,4 +15,7 @@ jobs:
         uses: jtalk/url-health-check-action@v2
         with:
           # Check the following URLs one by one sequentially
-          url: https://shrouded-peak-78795.herokuapp.com"
+          url: https://shrouded-peak-78795.herokuapp.com|https://shrouded-peak-78795.herokuapp.com/health"
+          max-attempts: 3 # Optional, defaults to 1
+          # Delay between retries
+          retry-delay: 5s
