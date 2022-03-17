@@ -62,6 +62,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          WITH_V: true
+          REPO_OWNER: dhatGuy
       - name: Discord success  notification
         if: ${{ success() }}
         uses: Ilshidur/action-discord@master
