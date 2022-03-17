@@ -56,6 +56,12 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !(contains( join( toJson(github.event.commits.*.message) ), '#skip')) }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
       - name: Discord success  notification
         if: ${{ success() }}
         uses: Ilshidur/action-discord@master
@@ -78,12 +84,3 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !(contains( join( toJson(github.event.commits.*.message) ), '#skip')) }}
-        uses: actions/checkout@v2
-          with:
-            fetch-depth: '0'
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
